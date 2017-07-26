@@ -10,11 +10,12 @@ RUN set -ex \
  			python-dev \
  			build-essential \
  	&& apt-get clean \
+ 	&& rm -rf /var/lib/apt/lists/* \
  	&& pip install --upgrade pip
 
 ENV APPPATH /opt/myflaskapp
 COPY . $APPPATH
 WORKDIR $APPPATH/app
-RUN pip install -r /opt/myflaskapp/app/requirements.txt
+RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
 CMD ["src/app.py"]
